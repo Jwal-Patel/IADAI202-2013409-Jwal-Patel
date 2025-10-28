@@ -984,7 +984,8 @@ st.markdown("---")
 st.markdown(f'''
 <div class="footer">
 Football Injury Impact Dashboard v2.2 &ndash; Enhanced Design<br>
-Developed for FootLens Analytics | Mathematics for AI-II (IBDP).<br>
+Developed for FootLens Analytics | Mathematics for IBCP<br>
+Jwal Patel 2013409<br>
 Data Source: Player Injuries & Team Performance | Updated: {datetime.now().strftime('%B %d, %Y')}<br>
 &copy; 2025 FootLens Analytics.
 </div>
