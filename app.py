@@ -1,8 +1,8 @@
 """
-🏆 FOOTBALL INJURY IMPACT DASHBOARD - ENHANCED VERSION WITH IMPROVED DESIGN
+🏆 FOOTBALL INJURY IMPACT DASHBOARD - FINAL VERSION v2.2
 ========================================================
 A comprehensive, production-ready Streamlit application for analyzing player injuries 
-and their impact on team performance. IMPROVED VERSION with better styling and layout.
+and their impact on team performance with clean, professional design.
 
 Company: FootLens Analytics
 Role: Junior Sports Data Analyst
@@ -11,7 +11,7 @@ Course: Mathematics for AI-II (IBDP)
 
 Author: AI Data Analytics Team
 Last Updated: October 2025
-Version: 2.1 (Enhanced Design)
+Version: 2.2 (Final - Clean Design)
 """
 
 import streamlit as st
@@ -45,9 +45,9 @@ WARNING_COLOR = "#ff9896"
 INFO_COLOR = "#17becf"
 
 # ============================================================================
-# PROFESSIONAL STYLING & BRANDING - IMPROVED VERSION
+# PROFESSIONAL MINIMALIST STYLING - CLEAN DESIGN
 # ============================================================================
-st.markdown("""
+st.markdown(f"""
     <style>
     :root {{
         --primary-color: {PRIMARY_COLOR};
@@ -56,104 +56,81 @@ st.markdown("""
         --danger-color: {DANGER_COLOR};
     }}
     
-    /* Main Header - Fixed and improved visibility */
+    /* Main Header - Clean and Professional */
     .main-header {{
-        font-size: 3.5rem;
+        font-size: 3.2rem;
         font-weight: bold;
         color: white;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
         margin: 20px 0 10px 0;
-        padding: 20px;
-        background: linear-gradient(135deg, {PRIMARY_COLOR} 0%, {SECONDARY_COLOR} 100%);
-        border-radius: 15px;
+        padding: 22px;
+        background: linear-gradient(135deg,#1f77b4 0%,#ff7f0e 100%);
+        border-radius: 14px;
         text-align: center;
         letter-spacing: 1px;
     }}
     
-    .football {{
-        font-size: 4rem;
-        animation: bounce 1s infinite;
+    /* Sub Header - Simple, No Box */
+    .sub-header {{
+        background: none !important;
+        color: #868e96 !important;
+        text-align: center !important;
+        font-weight: 430 !important;
+        font-size: 1.13rem !important;
+        margin-top: 10px;
+        margin-bottom: 14px !important;
+        border: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
     }}
     
-    @keyframes bounce {{
-        0%, 100% {{ transform: translateY(0); }}
-        50% {{ transform: translateY(-10px); }}
-    }}
-
-    /* Tab styling */
+    /* Tab Header */
     .tab-header {{
-        font-size: 1.8rem;
+        font-size: 1.85rem;
         font-weight: bold;
-        color: white;
-        margin: 20px 0 20px 0;
-        border-bottom: 4px solid {SECONDARY_COLOR};
-        padding: 15px 20px;
-        background: linear-gradient(90deg, {PRIMARY_COLOR}, transparent);
-        border-radius: 10px 10px 0 0;
+        color: #212529;
+        margin: 30px 0 15px 0;
+        border-bottom: 2px solid #ff7f0e;
+        padding-bottom: 10px;
     }}
     
-    /* Question styling - IMPROVED VISIBILITY */
+    /* Question Box */
     .question-box {{
         font-size: 1.5rem;
         font-weight: bold;
         color: white;
-        background: linear-gradient(135deg, {DANGER_COLOR} 0%, {WARNING_COLOR} 100%);
+        background: linear-gradient(135deg, #d62728 0%, #ff9896 100%);
         padding: 20px 25px;
-        margin: 20px 0;
-        border-radius: 12px;
-        border-left: 8px solid {SECONDARY_COLOR};
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        margin: 22px 0 16px 0;
+        border-radius: 11px;
+        border-left: 8px solid #ff7f0e;
     }}
     
-    /* Metric cards */
-    .metric-card {{
-        background: linear-gradient(135deg, #f0f2f6 0%, #e8eef7 100%);
-        padding: 20px;
-        border-radius: 12px;
-        border-left: 5px solid {PRIMARY_COLOR};
-        box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-    }}
-    
-    /* Q&A Section styling */
-    .qa-section {{
-        margin: 20px 0;
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        border-left: 5px solid {INFO_COLOR};
-    }}
-    
-    /* Title fix for questions */
-    h3 {{
-        color: {PRIMARY_COLOR};
-        font-size: 1.4rem;
-        font-weight: bold;
-        margin-top: 15px;
-        margin-bottom: 10px;
-    }}
-
-    .answer-box, .insight-box, .stat-highlight {{
+    /* Answer/Insight Boxes - Clean, Readable */
+    .answer-box, .insight-box {{
         background: #f9fcff !important;
-        color: #232629 !important;
+        color: #222 !important;
         font-weight: 600;
-        border-radius: 12px;
+        border-radius: 13px;
         border-left: 4px solid #3498db;
-        margin: 12px 0 !important;
-        padding: 18px 20px !important;
+        margin: 12px 0 18px 0 !important;
+        padding: 17px 20px 15px 20px !important;
         box-shadow: none !important;
     }}
-            
+    
+    /* Stat Highlight */
     .stat-highlight {{
         display: inline-block;
         background: #e2f2fc !important;
         color: #174066 !important;
         padding: 9px 14px 7px 14px;
         border-radius: 7px;
-        font-size: 1.15rem;
+        font-size: 1.17rem;
         margin-right: 10px;
         font-weight: bold;
     }}
     
+    /* Footer - Simple, Elegant */
     .footer {{
         background: none !important;
         color: #909398 !important;
@@ -163,21 +140,18 @@ st.markdown("""
         box-shadow: none !important;
         border-top: 1.5px solid #ededed !important;
         font-size: 0.97rem !important;
-        margin-top: 26px !important;
+        margin-top: 27px !important;
     }}
-            
-    .sub-header {{
-        background: none !important;
-        color: #868e96 !important;
-        text-align: center !important;
-        font-weight: 400 !important;
-        font-size: 1.13rem !important;
-        margin-bottom: 16px !important;
-        border: 0 !important;
-        padding: 0 !important;
-        box-shadow: none !important;
+    
+    /* Metric Cards */
+    .metric-card {{
+        background: linear-gradient(135deg, #f0f2f6 0%, #e8eef7 100%);
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 5px solid {PRIMARY_COLOR};
+        box-shadow: 0 2px 12px rgba(0,0,0,0.1);
     }}
-            
+    
     </style>
     """, unsafe_allow_html=True)
 
@@ -261,7 +235,7 @@ def load_and_preprocess_data():
             severe_keywords = ['cruciate', 'acl', 'meniscus', 'fracture', 'rupture', 'tear', 'ligament']
             moderate_keywords = ['hamstring', 'groin', 'calf', 'shoulder', 'ankle', 'strain']
             
-            injury_lower = injury_type.lower()
+            injury_lower = str(injury_type).lower()
             for keyword in severe_keywords:
                 if keyword in injury_lower:
                     return 'Severe'
@@ -302,7 +276,7 @@ if df is None:
     st.stop()
 
 # ============================================================================
-# IMPROVED DASHBOARD HEADER
+# DASHBOARD HEADER
 # ============================================================================
 st.markdown('<div class="main-header">⚽ FOOTBALL INJURY IMPACT DASHBOARD</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">🎯 Advanced Analytics for Team Performance Optimization | FootLens Analytics</div>', unsafe_allow_html=True)
@@ -366,7 +340,7 @@ with st.sidebar.expander("📊 Quick Stats", expanded=True):
     st.metric("Avg Injury Duration", f"{df_filtered['Injury_Duration_Days'].mean():.0f} days")
 
 # ============================================================================
-# KEY METRICS DASHBOARD (TOP ROW) - IMPROVED
+# KEY METRICS DASHBOARD (TOP ROW)
 # ============================================================================
 st.markdown("---")
 st.markdown("### 📈 KEY PERFORMANCE INDICATORS")
@@ -442,7 +416,7 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "📋 Data Export"
 ])
 
-# ========== TAB 1: OVERVIEW & INSIGHTS - IMPROVED DESIGN ==========
+# ========== TAB 1: OVERVIEW & INSIGHTS ==========
 with tab1:
     st.markdown('<div class="tab-header">📊 RESEARCH INSIGHTS & KEY FINDINGS</div>', unsafe_allow_html=True)
     
@@ -460,24 +434,22 @@ with tab1:
         
         for idx, (injury, row) in enumerate(top_injuries.iterrows(), 1):
             st.markdown(f"""
-            <div class="insight-box">
-            <strong>🥇 #{idx}: {injury}</strong><br>
-            🔻 Avg Team Drop: <span class="stat-highlight">{row['Team_Performance_Drop']:.2f}</span> GD<br>
-            ⏱️ Recovery: {row['Injury_Duration_Days']:.0f} days | 📊 Cases: {int(row['Name'])}
+            <div class="answer-box">
+            <b>#{idx}: {injury}</b><br>
+            <span class="stat-highlight">{row['Team_Performance_Drop']:.2f}</span> Avg Team Drop GD<br>
+            Recovery: {row['Injury_Duration_Days']:.0f} days | Cases: {int(row['Name'])}
             </div>
             """, unsafe_allow_html=True)
     
     with col2:
-        st.markdown("**Top Performance Impact Metrics**")
-        st.info(f"""
-        ✅ **Highest Impact Injury**: {top_injuries.index[0]} ({top_injuries.iloc[0]['Team_Performance_Drop']:.2f} GD drop)
-        
-        📊 **Average Performance Drop**: {top_injuries['Team_Performance_Drop'].mean():.2f} Goal Difference
-        
-        ⏱️ **Average Recovery Time**: {top_injuries['Injury_Duration_Days'].mean():.0f} days
-        
-        📈 **Total Cases**: {int(top_injuries['Name'].sum())} injuries analyzed
-        """)
+        st.markdown(f"""
+        <div class="answer-box">
+        <b>Highest Impact:</b> {top_injuries.index[0]}<br>
+        <span class="stat-highlight">{top_injuries.iloc[0]['Team_Performance_Drop']:.2f}</span> Max Drop GD<br>
+        <b>Avg Recovery:</b> {top_injuries['Injury_Duration_Days'].mean():.0f} days<br>
+        Total Cases: {int(top_injuries['Name'].sum())}
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown("---")
     
@@ -491,25 +463,27 @@ with tab1:
         total_win_during = df_filtered['Win_Ratio_During'].sum()
         total_matches = len(df_filtered) * 3
         
-        win_rate_before = (total_win_before / total_matches) * 100
-        win_rate_during = (total_win_during / total_matches) * 100
+        win_rate_before = (total_win_before / total_matches) * 100 if total_matches > 0 else 0
+        win_rate_during = (total_win_during / total_matches) * 100 if total_matches > 0 else 0
         win_decrease = win_rate_before - win_rate_during
         
-        st.markdown("""
-        <div class="insight-box">
-        <strong>Match Results Analysis</strong><br>
-        ✅ <span class="stat-highlight">Before Injury: {:.1f}%</span> win rate<br>
-        ❌ <span class="stat-highlight">During Absence: {:.1f}%</span> win rate<br>
-        📉 <span class="stat-highlight">Decrease: {:.1f}%</span>
+        st.markdown(f"""
+        <div class="answer-box">
+        <b>Match Results Analysis</b><br>
+        <span class="stat-highlight">{win_rate_before:.1f}%</span> win rate before injury<br>
+        <span class="stat-highlight">{win_rate_during:.1f}%</span> win rate during absence<br>
+        <span class="stat-highlight">{win_decrease:.1f}%</span> decrease
         </div>
-        """.format(win_rate_before, win_rate_during, win_decrease), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
     
     with col2:
-        st.markdown("**Win/Loss Summary**")
-        st.success(f"✅ Total Wins Before: {int(total_win_before)} matches")
-        st.error(f"❌ Total Wins During Absence: {int(total_win_during)} matches")
-        st.warning(f"📉 Win Rate Drop: {win_decrease:.1f}%")
-        st.info(f"📊 Total Matches Analyzed: {int(total_matches)}")
+        st.markdown(f"""
+        <div class="answer-box">
+        <b>Total matches analyzed:</b> {int(total_matches)}<br>
+        <b>Wins before:</b> <span class="stat-highlight">{int(total_win_before)}</span><br>
+        <b>Wins during absence:</b> <span class="stat-highlight">{int(total_win_during)}</span>
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown("---")
     
@@ -519,27 +493,26 @@ with tab1:
     comeback_players = df_filtered[df_filtered['Performance_Drop_Index'].notna()].nlargest(5, 'Performance_Drop_Index')[
         ['Name', 'Team Name', 'Injury', 'Performance_Drop_Index', 'Injury_Duration_Days', 'Age']
     ]
-
+    
     if len(comeback_players) > 0:
-    rows = [comeback_players[0:3], comeback_players[3:5]]
-    for row in rows:
-        cols = st.columns(len(row))
-        for idx, (_, r) in enumerate(row.iterrows()):
-            with cols[idx]:
-                st.markdown(f"""
-                <div class="answer-box">
-                <b>{r['Name']}</b><br>
-                {r['Team Name']}<br>
-                {r['Injury']}<br>
-                <span class="stat-highlight">{r['Performance_Drop_Index']:.2f}</span> improvement points<br>
-                {int(r['Injury_Duration_Days'])} days recovery
-                </div>
-                """, unsafe_allow_html=True)
-
+        rows = [comeback_players.iloc[0:3], comeback_players.iloc[3:5]]
+        for row in rows:
+            cols = st.columns(len(row))
+            for idx, (_, r) in enumerate(row.iterrows()):
+                with cols[idx]:
+                    st.markdown(f"""
+                    <div class="answer-box">
+                    <b>{r['Name']}</b><br>
+                    {r['Team Name']}<br>
+                    {r['Injury']}<br>
+                    <span class="stat-highlight">{r['Performance_Drop_Index']:.2f}</span> improvement points<br>
+                    {int(r['Injury_Duration_Days'])} days recovery
+                    </div>
+                    """, unsafe_allow_html=True)
     
     st.markdown("---")
     
-    # RESEARCH QUESTION 4 & 5 - IMPROVED LAYOUT
+    # RESEARCH QUESTION 4 & 5
     st.markdown('<div class="question-box">❓ Q4 & Q5: Injury clusters & most affected clubs</div>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
@@ -550,13 +523,16 @@ with tab1:
             ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         )
         
-        # Create a more readable format
         month_text = ""
         for month, count in monthly_data.items():
             if pd.notna(count) and count > 0:
                 month_text += f"📅 {month}: {int(count)} injuries\n"
         
-        st.success(month_text if month_text else "No data available")
+        st.markdown(f"""
+        <div class="answer-box">
+        {month_text if month_text else "No data available"}
+        </div>
+        """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("#### 🏆 Most Affected Clubs")
@@ -569,7 +545,11 @@ with tab1:
         for idx, (team, row) in enumerate(club_injuries.iterrows(), 1):
             club_text += f"#{idx}. {team}: {int(row['Name'])} cases (Severity: {row['Team_Impact_Severity']:.2f})\n"
         
-        st.info(club_text)
+        st.markdown(f"""
+        <div class="answer-box">
+        {club_text}
+        </div>
+        """, unsafe_allow_html=True)
 
 # ========== TAB 2: INJURY ANALYSIS ==========
 with tab2:
@@ -1001,12 +981,11 @@ with tab7:
 # FOOTER
 # ============================================================================
 st.markdown("---")
-st.markdown(f"""
+st.markdown(f'''
 <div class="footer">
-    <strong>⚽ Football Injury Impact Dashboard v2.1 - Enhanced Design</strong><br>
-    Developed for FootLens Analytics | Course: Mathematics for AI-II (IBDP)<br>
-    Assignment: Developing User-Centered Dashboards to Solve Real-World Problems<br>
-    <small>Data Source: Player Injuries & Team Performance | Last Updated: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}</small><br>
-    <small>© 2025 FootLens Analytics. All rights reserved.</small>
+Football Injury Impact Dashboard v2.2 &ndash; Enhanced Design<br>
+Developed for FootLens Analytics | Mathematics for AI-II (IBDP).<br>
+Data Source: Player Injuries & Team Performance | Updated: {datetime.now().strftime('%B %d, %Y')}<br>
+&copy; 2025 FootLens Analytics.
 </div>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
