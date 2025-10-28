@@ -519,28 +519,23 @@ with tab1:
     comeback_players = df_filtered[df_filtered['Performance_Drop_Index'].notna()].nlargest(5, 'Performance_Drop_Index')[
         ['Name', 'Team Name', 'Injury', 'Performance_Drop_Index', 'Injury_Duration_Days', 'Age']
     ]
-    
+
     if len(comeback_players) > 0:
-        col1, col2, col3 = st.columns(3)
-        
-        for idx, (_, row) in enumerate(comeback_players.iterrows()):
-            if idx == 0:
-                col = col1
-            elif idx == 1:
-                col = col2
-            else:
-                col = col3
-            
-            with col:
+    rows = [comeback_players[0:3], comeback_players[3:5]]
+    for row in rows:
+        cols = st.columns(len(row))
+        for idx, (_, r) in enumerate(row.iterrows()):
+            with cols[idx]:
                 st.markdown(f"""
-                <div class="insight-box">
-                <strong>🌟 {row['Name']}</strong><br>
-                {row['Team Name']}<br>
-                {row['Injury']}<br>
-                📈 Improvement: <span class="stat-highlight">{row['Performance_Drop_Index']:.2f}</span> points<br>
-                ⏱️ {row['Injury_Duration_Days']:.0f} days recovery
+                <div class="answer-box">
+                <b>{r['Name']}</b><br>
+                {r['Team Name']}<br>
+                {r['Injury']}<br>
+                <span class="stat-highlight">{r['Performance_Drop_Index']:.2f}</span> improvement points<br>
+                {int(r['Injury_Duration_Days'])} days recovery
                 </div>
                 """, unsafe_allow_html=True)
+
     
     st.markdown("---")
     
