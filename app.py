@@ -47,7 +47,7 @@ INFO_COLOR = "#17becf"
 # ============================================================================
 # PROFESSIONAL STYLING & BRANDING - IMPROVED VERSION
 # ============================================================================
-st.markdown(f"""
+st.markdown("""
     <style>
     :root {{
         --primary-color: {PRIMARY_COLOR};
@@ -79,19 +79,7 @@ st.markdown(f"""
         0%, 100% {{ transform: translateY(0); }}
         50% {{ transform: translateY(-10px); }}
     }}
-    
-    .sub-header {{
-        font-size: 1.3rem;
-        color: white;
-        margin-bottom: 1rem;
-        font-weight: 500;
-        text-align: center;
-        background: linear-gradient(90deg, {SECONDARY_COLOR}, {PRIMARY_COLOR});
-        padding: 15px;
-        border-radius: 10px;
-        letter-spacing: 0.5px;
-    }}
-    
+
     /* Tab styling */
     .tab-header {{
         font-size: 1.8rem;
@@ -117,28 +105,6 @@ st.markdown(f"""
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }}
     
-    /* Insight box - IMPROVED VISIBILITY */
-    .insight-box {{
-        background: linear-gradient(135deg, #e8f4f8 0%, #dbedf8 100%);
-        padding: 20px;
-        border-radius: 10px;
-        border-left: 6px solid {SECONDARY_COLOR};
-        margin: 15px 0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        font-size: 1.05rem;
-    }}
-    
-    .stat-highlight {{
-        background-color: {INFO_COLOR};
-        color: white;
-        padding: 12px 18px;
-        border-radius: 8px;
-        font-weight: bold;
-        display: inline-block;
-        margin: 5px 5px 5px 0;
-        font-size: 1.1rem;
-    }}
-    
     /* Metric cards */
     .metric-card {{
         background: linear-gradient(135deg, #f0f2f6 0%, #e8eef7 100%);
@@ -146,18 +112,6 @@ st.markdown(f"""
         border-radius: 12px;
         border-left: 5px solid {PRIMARY_COLOR};
         box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-    }}
-    
-    /* Footer */
-    .footer {{
-        text-align: center;
-        color: white;
-        padding: 25px;
-        font-size: 0.95rem;
-        border-top: 3px solid {SECONDARY_COLOR};
-        margin-top: 40px;
-        background: linear-gradient(135deg, {PRIMARY_COLOR}, {SECONDARY_COLOR});
-        border-radius: 10px;
     }}
     
     /* Q&A Section styling */
@@ -177,7 +131,53 @@ st.markdown(f"""
         margin-top: 15px;
         margin-bottom: 10px;
     }}
+
+    .answer-box, .insight-box, .stat-highlight {{
+        background: #f9fcff !important;
+        color: #232629 !important;
+        font-weight: 600;
+        border-radius: 12px;
+        border-left: 4px solid #3498db;
+        margin: 12px 0 !important;
+        padding: 18px 20px !important;
+        box-shadow: none !important;
+    }}
+            
+    .stat-highlight {{
+        display: inline-block;
+        background: #e2f2fc !important;
+        color: #174066 !important;
+        padding: 9px 14px 7px 14px;
+        border-radius: 7px;
+        font-size: 1.15rem;
+        margin-right: 10px;
+        font-weight: bold;
+    }}
     
+    .footer {{
+        background: none !important;
+        color: #909398 !important;
+        border-radius: 0 !important;
+        padding: 18px 0 10px 0 !important;
+        text-align: center !important;
+        box-shadow: none !important;
+        border-top: 1.5px solid #ededed !important;
+        font-size: 0.97rem !important;
+        margin-top: 26px !important;
+    }}
+            
+    .sub-header {{
+        background: none !important;
+        color: #868e96 !important;
+        text-align: center !important;
+        font-weight: 400 !important;
+        font-size: 1.13rem !important;
+        margin-bottom: 16px !important;
+        border: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+    }}
+            
     </style>
     """, unsafe_allow_html=True)
 
