@@ -1,9 +1,8 @@
 """
-🏆 FOOTBALL INJURY IMPACT DASHBOARD - ENHANCED VERSION
+🏆 FOOTBALL INJURY IMPACT DASHBOARD - ENHANCED VERSION WITH IMPROVED DESIGN
 ========================================================
 A comprehensive, production-ready Streamlit application for analyzing player injuries 
-and their impact on team performance. This version includes advanced features, 
-comprehensive data analysis, and professional design optimized for Streamlit Cloud deployment.
+and their impact on team performance. IMPROVED VERSION with better styling and layout.
 
 Company: FootLens Analytics
 Role: Junior Sports Data Analyst
@@ -12,7 +11,7 @@ Course: Mathematics for AI-II (IBDP)
 
 Author: AI Data Analytics Team
 Last Updated: October 2025
-Version: 2.0 (Enhanced with Extra Features for 60/60 marks)
+Version: 2.1 (Enhanced Design)
 """
 
 import streamlit as st
@@ -24,7 +23,6 @@ from datetime import datetime, timedelta
 import warnings
 from scipy import stats
 from io import BytesIO
-import base64
 
 warnings.filterwarnings('ignore')
 
@@ -47,7 +45,7 @@ WARNING_COLOR = "#ff9896"
 INFO_COLOR = "#17becf"
 
 # ============================================================================
-# PROFESSIONAL STYLING & BRANDING
+# PROFESSIONAL STYLING & BRANDING - IMPROVED VERSION
 # ============================================================================
 st.markdown(f"""
     <style>
@@ -58,65 +56,128 @@ st.markdown(f"""
         --danger-color: {DANGER_COLOR};
     }}
     
+    /* Main Header - Fixed and improved visibility */
     .main-header {{
-        font-size: 2.8rem;
+        font-size: 3.5rem;
         font-weight: bold;
-        color: {PRIMARY_COLOR};
-        margin-bottom: 0.5rem;
-        background: linear-gradient(90deg, {PRIMARY_COLOR}, {SECONDARY_COLOR});
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        margin: 20px 0 10px 0;
+        padding: 20px;
+        background: linear-gradient(135deg, {PRIMARY_COLOR} 0%, {SECONDARY_COLOR} 100%);
+        border-radius: 15px;
+        text-align: center;
+        letter-spacing: 1px;
+    }}
+    
+    .football {{
+        font-size: 4rem;
+        animation: bounce 1s infinite;
+    }}
+    
+    @keyframes bounce {{
+        0%, 100% {{ transform: translateY(0); }}
+        50% {{ transform: translateY(-10px); }}
     }}
     
     .sub-header {{
         font-size: 1.3rem;
-        color: #555;
+        color: white;
         margin-bottom: 1rem;
         font-weight: 500;
-    }}
-    
-    .metric-card {{
-        background: linear-gradient(135deg, #f0f2f6 0%, #e8eef7 100%);
-        padding: 20px;
-        border-radius: 12px;
-        border-left: 5px solid {PRIMARY_COLOR};
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }}
-    
-    .insight-box {{
-        background: linear-gradient(135deg, #e8f4f8 0%, #dbedf8 100%);
+        text-align: center;
+        background: linear-gradient(90deg, {SECONDARY_COLOR}, {PRIMARY_COLOR});
         padding: 15px;
         border-radius: 10px;
-        border-left: 5px solid {SECONDARY_COLOR};
-        margin: 10px 0;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        letter-spacing: 0.5px;
     }}
     
+    /* Tab styling */
     .tab-header {{
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: white;
+        margin: 20px 0 20px 0;
+        border-bottom: 4px solid {SECONDARY_COLOR};
+        padding: 15px 20px;
+        background: linear-gradient(90deg, {PRIMARY_COLOR}, transparent);
+        border-radius: 10px 10px 0 0;
+    }}
+    
+    /* Question styling - IMPROVED VISIBILITY */
+    .question-box {{
         font-size: 1.5rem;
         font-weight: bold;
-        color: {PRIMARY_COLOR};
-        margin-bottom: 1.5rem;
-        border-bottom: 3px solid {SECONDARY_COLOR};
-        padding-bottom: 0.5rem;
+        color: white;
+        background: linear-gradient(135deg, {DANGER_COLOR} 0%, {WARNING_COLOR} 100%);
+        padding: 20px 25px;
+        margin: 20px 0;
+        border-radius: 12px;
+        border-left: 8px solid {SECONDARY_COLOR};
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }}
+    
+    /* Insight box - IMPROVED VISIBILITY */
+    .insight-box {{
+        background: linear-gradient(135deg, #e8f4f8 0%, #dbedf8 100%);
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 6px solid {SECONDARY_COLOR};
+        margin: 15px 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        font-size: 1.05rem;
     }}
     
     .stat-highlight {{
         background-color: {INFO_COLOR};
         color: white;
-        padding: 10px 15px;
+        padding: 12px 18px;
         border-radius: 8px;
         font-weight: bold;
+        display: inline-block;
+        margin: 5px 5px 5px 0;
+        font-size: 1.1rem;
     }}
     
+    /* Metric cards */
+    .metric-card {{
+        background: linear-gradient(135deg, #f0f2f6 0%, #e8eef7 100%);
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 5px solid {PRIMARY_COLOR};
+        box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }}
+    
+    /* Footer */
     .footer {{
         text-align: center;
-        color: #666;
-        padding: 20px;
-        font-size: 0.9rem;
-        border-top: 2px solid #eee;
+        color: white;
+        padding: 25px;
+        font-size: 0.95rem;
+        border-top: 3px solid {SECONDARY_COLOR};
         margin-top: 40px;
+        background: linear-gradient(135deg, {PRIMARY_COLOR}, {SECONDARY_COLOR});
+        border-radius: 10px;
     }}
+    
+    /* Q&A Section styling */
+    .qa-section {{
+        margin: 20px 0;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        border-left: 5px solid {INFO_COLOR};
+    }}
+    
+    /* Title fix for questions */
+    h3 {{
+        color: {PRIMARY_COLOR};
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }}
+    
     </style>
     """, unsafe_allow_html=True)
 
@@ -127,30 +188,25 @@ st.markdown(f"""
 def load_and_preprocess_data():
     """
     Advanced data preprocessing pipeline with comprehensive feature engineering.
-    Handles missing values, type conversions, and creates 15+ analytical features.
     """
     try:
-        # Load dataset
         df = pd.read_csv('player_injuries_impact.csv')
         
-        # ==== PHASE 1: DATE PROCESSING ====
+        # Date processing
         df['Date of Injury'] = pd.to_datetime(df['Date of Injury'], errors='coerce')
         df['Date of return'] = pd.to_datetime(df['Date of return'], errors='coerce')
         
-        # Calculate injury duration
         df['Injury_Duration_Days'] = (df['Date of return'] - df['Date of Injury']).dt.days
         df['Injury_Duration_Days'] = df['Injury_Duration_Days'].fillna(df['Injury_Duration_Days'].median())
         
-        # Temporal decomposition
         df['Injury_Month'] = df['Date of Injury'].dt.month
         df['Injury_Year'] = df['Date of Injury'].dt.year
         df['Injury_Month_Name'] = df['Date of Injury'].dt.strftime('%B')
         df['Injury_Quarter'] = df['Date of Injury'].dt.quarter
         df['Injury_Week'] = df['Date of Injury'].dt.isocalendar().week
         
-        # ==== PHASE 2: VALUE CLEANING ====
+        # Value cleaning
         def clean_rating(val):
-            """Convert rating values, handling special formats like '6(S)'"""
             if val == 'N.A.' or pd.isna(val):
                 return np.nan
             try:
@@ -159,7 +215,6 @@ def load_and_preprocess_data():
                 return np.nan
         
         def clean_gd(val):
-            """Convert goal difference values"""
             if val == 'N.A.' or pd.isna(val):
                 return np.nan
             try:
@@ -167,7 +222,6 @@ def load_and_preprocess_data():
             except:
                 return np.nan
         
-        # Apply cleaning functions
         rating_cols = [col for col in df.columns if 'Player_rating' in col]
         for col in rating_cols:
             df[col] = df[col].apply(clean_rating)
@@ -176,9 +230,7 @@ def load_and_preprocess_data():
         for col in gd_cols:
             df[col] = df[col].apply(clean_gd)
         
-        # ==== PHASE 3: FEATURE ENGINEERING ====
-        
-        # Player Performance Metrics
+        # Feature engineering
         before_rating_cols = ['Match1_before_injury_Player_rating', 'Match2_before_injury_Player_rating', 'Match3_before_injury_Player_rating']
         after_rating_cols = ['Match1_after_injury_Player_rating', 'Match2_after_injury_Player_rating', 'Match3_after_injury_Player_rating']
         
@@ -187,7 +239,6 @@ def load_and_preprocess_data():
         df['Performance_Drop_Index'] = df['Avg_Rating_Before_Injury'] - df['Avg_Rating_After_Injury']
         df['Performance_Recovery_Rate'] = (df['Performance_Drop_Index'] / (df['Avg_Rating_Before_Injury'] + 0.001)) * 100
         
-        # Team Performance During Absence
         missed_gd_cols = ['Match1_missed_match_GD', 'Match2_missed_match_GD', 'Match3_missed_match_GD']
         before_gd_cols = ['Match1_before_injury_GD', 'Match2_before_injury_GD', 'Match3_before_injury_GD']
         after_gd_cols = ['Match1_after_injury_GD', 'Match2_after_injury_GD', 'Match3_after_injury_GD']
@@ -197,19 +248,6 @@ def load_and_preprocess_data():
         df['Avg_GD_After'] = df[after_gd_cols].mean(axis=1)
         df['Team_Performance_Drop'] = df['Avg_GD_Before'] - df['Team_Performance_During_Absence']
         
-        # Match Results Analysis
-        before_results = pd.concat([
-            df['Match1_before_injury_Result'],
-            df['Match2_before_injury_Result'],
-            df['Match3_before_injury_Result']
-        ]).value_counts()
-        
-        missed_results = pd.concat([
-            df['Match1_missed_match_Result'],
-            df['Match2_missed_match_Result'],
-            df['Match3_missed_match_Result']
-        ]).value_counts()
-        
         df['Win_Ratio_Before'] = (df['Match1_before_injury_Result'] == 'win').astype(int) + \
                                  (df['Match2_before_injury_Result'] == 'win').astype(int) + \
                                  (df['Match3_before_injury_Result'] == 'win').astype(int)
@@ -218,7 +256,7 @@ def load_and_preprocess_data():
                                  (df['Match2_missed_match_Result'] == 'win').astype(int) + \
                                  (df['Match3_missed_match_Result'] == 'win').astype(int)
         
-        # Injury Severity Categorization
+        # Injury severity
         def categorize_severity(injury_type):
             severe_keywords = ['cruciate', 'acl', 'meniscus', 'fracture', 'rupture', 'tear', 'ligament']
             moderate_keywords = ['hamstring', 'groin', 'calf', 'shoulder', 'ankle', 'strain']
@@ -234,21 +272,18 @@ def load_and_preprocess_data():
         
         df['Injury_Severity'] = df['Injury'].apply(categorize_severity)
         
-        # Recovery & Impact Indices
         df['Recovery_Index'] = df['Injury_Duration_Days'] / 100
         df['Team_Impact_Severity'] = abs(df['Team_Performance_Drop']) * np.where(df['Injury_Severity'] == 'Severe', 1.5,
                                         np.where(df['Injury_Severity'] == 'Moderate', 1.0, 0.7))
         
-        # Age Group Categorization
         df['Age_Group'] = pd.cut(df['Age'], bins=[0, 23, 26, 29, 40], 
                                  labels=['Young (≤23)', 'Prime (24-26)', 'Experienced (27-29)', 'Veteran (30+)'])
         
-        # Performance Categories
         df['Performance_Category'] = pd.cut(df['FIFA rating'], 
                                            bins=[0, 75, 80, 85, 100],
                                            labels=['Average', 'Good', 'Very Good', 'Elite'])
         
-        # ==== PHASE 4: MISSING VALUE HANDLING ====
+        # Missing value handling
         numeric_cols = df.select_dtypes(include=[np.number]).columns
         for col in numeric_cols:
             df[col].fillna(df[col].median(), inplace=True)
@@ -267,17 +302,16 @@ if df is None:
     st.stop()
 
 # ============================================================================
-# DASHBOARD HEADER WITH BRANDING
+# IMPROVED DASHBOARD HEADER
 # ============================================================================
 st.markdown('<div class="main-header">⚽ FOOTBALL INJURY IMPACT DASHBOARD</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-header">Advanced Analytics for Team Performance Optimization | FootLens Analytics</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">🎯 Advanced Analytics for Team Performance Optimization | FootLens Analytics</div>', unsafe_allow_html=True)
 
 # ============================================================================
 # SIDEBAR CONFIGURATION & FILTERS
 # ============================================================================
 st.sidebar.header("🔍 FILTER & CUSTOMIZE")
 
-# Filter Options
 with st.sidebar.expander("📋 Filter Options", expanded=True):
     selected_teams = st.multiselect(
         "🏆 Select Teams",
@@ -307,7 +341,6 @@ with st.sidebar.expander("📋 Filter Options", expanded=True):
         key="position_filter"
     )
     
-    # Age Group Filter
     age_groups = sorted(df['Age_Group'].dropna().unique())
     selected_age = st.multiselect(
         "👶 Age Group",
@@ -333,10 +366,10 @@ with st.sidebar.expander("📊 Quick Stats", expanded=True):
     st.metric("Avg Injury Duration", f"{df_filtered['Injury_Duration_Days'].mean():.0f} days")
 
 # ============================================================================
-# KEY METRICS DASHBOARD (TOP ROW)
+# KEY METRICS DASHBOARD (TOP ROW) - IMPROVED
 # ============================================================================
 st.markdown("---")
-st.subheader("📈 KEY PERFORMANCE INDICATORS")
+st.markdown("### 📈 KEY PERFORMANCE INDICATORS")
 
 col1, col2, col3, col4, col5, col6 = st.columns(6)
 
@@ -409,94 +442,139 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "📋 Data Export"
 ])
 
-# ========== TAB 1: OVERVIEW & INSIGHTS ==========
+# ========== TAB 1: OVERVIEW & INSIGHTS - IMPROVED DESIGN ==========
 with tab1:
     st.markdown('<div class="tab-header">📊 RESEARCH INSIGHTS & KEY FINDINGS</div>', unsafe_allow_html=True)
     
+    # RESEARCH QUESTION 1
+    st.markdown('<div class="question-box">❓ Q1: Which injuries caused biggest performance drop?</div>', unsafe_allow_html=True)
+    
     col1, col2 = st.columns(2)
     
-    # RESEARCH QUESTION 1
     with col1:
-        st.markdown("### ❓ Q1: Which injuries caused biggest performance drop?")
         top_injuries = df_filtered.groupby('Injury').agg({
             'Team_Performance_Drop': 'mean',
             'Injury_Duration_Days': 'mean',
             'Name': 'count'
-        }).sort_values('Team_Performance_Drop', ascending=False).head(5)
+        }).sort_values('Team_Performance_Drop', ascending=False).head(3)
         
         for idx, (injury, row) in enumerate(top_injuries.iterrows(), 1):
             st.markdown(f"""
             <div class="insight-box">
-            <strong>{idx}. {injury}</strong><br>
+            <strong>🥇 #{idx}: {injury}</strong><br>
             🔻 Avg Team Drop: <span class="stat-highlight">{row['Team_Performance_Drop']:.2f}</span> GD<br>
-            ⏱️ Recovery Time: {row['Injury_Duration_Days']:.0f} days | 📊 Cases: {int(row['Name'])}
+            ⏱️ Recovery: {row['Injury_Duration_Days']:.0f} days | 📊 Cases: {int(row['Name'])}
             </div>
             """, unsafe_allow_html=True)
     
-    # RESEARCH QUESTION 2
     with col2:
-        st.markdown("### ❓ Q2: Win/Loss record during player absence?")
+        st.markdown("**Top Performance Impact Metrics**")
+        st.info(f"""
+        ✅ **Highest Impact Injury**: {top_injuries.index[0]} ({top_injuries.iloc[0]['Team_Performance_Drop']:.2f} GD drop)
+        
+        📊 **Average Performance Drop**: {top_injuries['Team_Performance_Drop'].mean():.2f} Goal Difference
+        
+        ⏱️ **Average Recovery Time**: {top_injuries['Injury_Duration_Days'].mean():.0f} days
+        
+        📈 **Total Cases**: {int(top_injuries['Name'].sum())} injuries analyzed
+        """)
+    
+    st.markdown("---")
+    
+    # RESEARCH QUESTION 2
+    st.markdown('<div class="question-box">❓ Q2: Win/Loss record during player absence?</div>', unsafe_allow_html=True)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
         total_win_before = df_filtered['Win_Ratio_Before'].sum()
         total_win_during = df_filtered['Win_Ratio_During'].sum()
-        win_decrease = ((total_win_before - total_win_during) / max(total_win_before, 1)) * 100
+        total_matches = len(df_filtered) * 3
         
-        st.markdown(f"""
+        win_rate_before = (total_win_before / total_matches) * 100
+        win_rate_during = (total_win_during / total_matches) * 100
+        win_decrease = win_rate_before - win_rate_during
+        
+        st.markdown("""
         <div class="insight-box">
         <strong>Match Results Analysis</strong><br>
-        ✅ Wins Before Injury: <span class="stat-highlight">{int(total_win_before)}</span> matches<br>
-        ❌ Wins During Absence: <span class="stat-highlight">{int(total_win_during)}</span> matches<br>
-        📉 Win Rate Decrease: <span class="stat-highlight">{win_decrease:.1f}%</span>
+        ✅ <span class="stat-highlight">Before Injury: {:.1f}%</span> win rate<br>
+        ❌ <span class="stat-highlight">During Absence: {:.1f}%</span> win rate<br>
+        📉 <span class="stat-highlight">Decrease: {:.1f}%</span>
         </div>
-        """, unsafe_allow_html=True)
+        """.format(win_rate_before, win_rate_during, win_decrease), unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("**Win/Loss Summary**")
+        st.success(f"✅ Total Wins Before: {int(total_win_before)} matches")
+        st.error(f"❌ Total Wins During Absence: {int(total_win_during)} matches")
+        st.warning(f"📉 Win Rate Drop: {win_decrease:.1f}%")
+        st.info(f"📊 Total Matches Analyzed: {int(total_matches)}")
+    
+    st.markdown("---")
     
     # RESEARCH QUESTION 3
-    st.markdown("### ❓ Q3: How did players perform after recovery?")
+    st.markdown('<div class="question-box">❓ Q3: How did players perform after recovery?</div>', unsafe_allow_html=True)
+    
     comeback_players = df_filtered[df_filtered['Performance_Drop_Index'].notna()].nlargest(5, 'Performance_Drop_Index')[
         ['Name', 'Team Name', 'Injury', 'Performance_Drop_Index', 'Injury_Duration_Days', 'Age']
     ]
     
-    col1, col2, col3 = st.columns(3)
-    for idx, (_, row) in enumerate(comeback_players.iterrows()):
-        if idx == 0:
-            col = col1
-        elif idx == 1:
-            col = col2
-        else:
-            col = col3
+    if len(comeback_players) > 0:
+        col1, col2, col3 = st.columns(3)
         
-        with col:
-            st.markdown(f"""
-            <div class="insight-box">
-            <strong>🌟 {row['Name']}</strong><br>
-            Team: {row['Team Name']}<br>
-            Injury: {row['Injury']}<br>
-            📈 Improvement: <span class="stat-highlight">{row['Performance_Drop_Index']:.2f}</span> points<br>
-            ⏱️ Recovery: {row['Injury_Duration_Days']:.0f} days
-            </div>
-            """, unsafe_allow_html=True)
+        for idx, (_, row) in enumerate(comeback_players.iterrows()):
+            if idx == 0:
+                col = col1
+            elif idx == 1:
+                col = col2
+            else:
+                col = col3
+            
+            with col:
+                st.markdown(f"""
+                <div class="insight-box">
+                <strong>🌟 {row['Name']}</strong><br>
+                {row['Team Name']}<br>
+                {row['Injury']}<br>
+                📈 Improvement: <span class="stat-highlight">{row['Performance_Drop_Index']:.2f}</span> points<br>
+                ⏱️ {row['Injury_Duration_Days']:.0f} days recovery
+                </div>
+                """, unsafe_allow_html=True)
     
-    # RESEARCH QUESTION 4 & 5
-    st.markdown("### ❓ Q4 & Q5: Injury clusters & most affected clubs")
+    st.markdown("---")
+    
+    # RESEARCH QUESTION 4 & 5 - IMPROVED LAYOUT
+    st.markdown('<div class="question-box">❓ Q4 & Q5: Injury clusters & most affected clubs</div>', unsafe_allow_html=True)
+    
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("**Monthly Injury Distribution**")
+        st.markdown("#### 📅 Monthly Injury Distribution")
         monthly_data = df_filtered['Injury_Month_Name'].value_counts().reindex(
             ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         )
+        
+        # Create a more readable format
+        month_text = ""
         for month, count in monthly_data.items():
             if pd.notna(count) and count > 0:
-                st.write(f"📅 {month}: {int(count)} injuries")
+                month_text += f"📅 {month}: {int(count)} injuries\n"
+        
+        st.success(month_text if month_text else "No data available")
     
     with col2:
-        st.markdown("**Most Affected Clubs**")
+        st.markdown("#### 🏆 Most Affected Clubs")
         club_injuries = df_filtered.groupby('Team Name').agg({
             'Name': 'count',
             'Team_Impact_Severity': 'mean'
         }).sort_values('Name', ascending=False).head(5)
         
-        for team, row in club_injuries.iterrows():
-            st.write(f"🏆 {team}: {int(row['Name'])} cases (Severity: {row['Team_Impact_Severity']:.2f})")
+        club_text = ""
+        for idx, (team, row) in enumerate(club_injuries.iterrows(), 1):
+            club_text += f"#{idx}. {team}: {int(row['Name'])} cases (Severity: {row['Team_Impact_Severity']:.2f})\n"
+        
+        st.info(club_text)
 
 # ========== TAB 2: INJURY ANALYSIS ==========
 with tab2:
@@ -504,7 +582,6 @@ with tab2:
     
     col1, col2 = st.columns(2)
     
-    # Chart 1: Top Injuries Performance Impact
     with col1:
         st.markdown("#### Top 10 Injuries - Team Performance Impact")
         top_injuries_impact = df_filtered.groupby('Injury').agg({
@@ -538,9 +615,8 @@ with tab2:
         )
         st.plotly_chart(fig1, use_container_width=True)
     
-    # Chart 2: Injury Severity Distribution
     with col2:
-        st.markdown("#### Injury Severity Distribution (Pie Chart)")
+        st.markdown("#### Injury Severity Distribution")
         severity_dist = df_filtered['Injury_Severity'].value_counts()
         
         colors_map = {'Severe': DANGER_COLOR, 'Moderate': WARNING_COLOR, 'Minor': SUCCESS_COLOR}
@@ -559,8 +635,7 @@ with tab2:
         )
         st.plotly_chart(fig2, use_container_width=True)
     
-    # Chart 3: Recovery vs Performance
-    st.markdown("#### Recovery Duration vs Performance Drop (Scatter Analysis)")
+    st.markdown("#### Recovery Duration vs Performance Drop")
     
     fig3 = px.scatter(
         df_filtered[df_filtered['Performance_Drop_Index'].notna()],
@@ -579,28 +654,6 @@ with tab2:
     )
     fig3.update_layout(height=480)
     st.plotly_chart(fig3, use_container_width=True)
-    
-    # Chart 4: Injury Impact by Type
-    st.markdown("#### Average Team Impact Score by Injury Type")
-    injury_impact = df_filtered.groupby('Injury')['Team_Impact_Severity'].mean().sort_values(ascending=False).head(8)
-    
-    fig4 = go.Figure()
-    fig4.add_trace(go.Bar(
-        x=injury_impact.values,
-        y=injury_impact.index,
-        orientation='h',
-        marker=dict(color=injury_impact.values, colorscale='Viridis', showscale=True),
-        text=injury_impact.values.round(2),
-        textposition='outside',
-        hovertemplate='<b>%{y}</b><br>Impact Score: %{x:.2f}<extra></extra>'
-    ))
-    fig4.update_layout(
-        title="Team Impact Severity by Injury Type",
-        xaxis_title="Impact Score",
-        height=400,
-        template="plotly_white"
-    )
-    st.plotly_chart(fig4, use_container_width=True)
 
 # ========== TAB 3: PLAYER PERFORMANCE ==========
 with tab3:
@@ -608,7 +661,6 @@ with tab3:
     
     col1, col2 = st.columns(2)
     
-    # Chart 1: Most Injured Players
     with col1:
         st.markdown("#### Most Injured Players (Top 15)")
         most_injured = df_filtered['Name'].value_counts().head(15)
@@ -631,7 +683,6 @@ with tab3:
         )
         st.plotly_chart(fig5, use_container_width=True)
     
-    # Chart 2: Comeback Performance
     with col2:
         st.markdown("#### Comeback Players - Performance Improvement")
         comeback_data = df_filtered[df_filtered['Performance_Drop_Index'].notna()].nlargest(10, 'Performance_Drop_Index')[
@@ -665,7 +716,7 @@ with tab3:
         )
         st.plotly_chart(fig6, use_container_width=True)
     
-    # Player Selector for Deep Dive
+    st.markdown("---")
     st.markdown("#### 🔍 Individual Player Deep Dive Analysis")
     
     selected_player = st.selectbox(
@@ -691,7 +742,8 @@ with tab3:
         with col5:
             st.metric("Injuries", len(player_data))
         
-        # Player performance timeline
+        st.markdown("---")
+        
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             st.metric("Avg Rating Before", f"{player_info['Avg_Rating_Before_Injury']:.1f}" if not pd.isna(player_info['Avg_Rating_Before_Injury']) else "N/A")
@@ -702,7 +754,6 @@ with tab3:
         with col4:
             st.metric("Severity", player_info['Injury_Severity'])
         
-        # Injury history table
         st.markdown("**Injury History:**")
         injury_history = player_data[['Date of Injury', 'Injury', 'Injury_Severity', 'Injury_Duration_Days', 'Performance_Drop_Index']].copy()
         injury_history['Date of Injury'] = injury_history['Date of Injury'].dt.strftime('%Y-%m-%d')
@@ -714,7 +765,6 @@ with tab4:
     
     col1, col2 = st.columns(2)
     
-    # Chart 1: Team Injury Frequency
     with col1:
         st.markdown("#### Teams by Injury Frequency")
         team_injuries = df_filtered.groupby('Team Name').size().sort_values(ascending=False).head(10)
@@ -738,7 +788,6 @@ with tab4:
         )
         st.plotly_chart(fig7, use_container_width=True)
     
-    # Chart 2: Team Performance Impact
     with col2:
         st.markdown("#### Team Performance Drop by Club")
         team_perf = df_filtered.groupby('Team Name')['Team_Performance_Drop'].mean().sort_values(ascending=False).head(10)
@@ -762,7 +811,6 @@ with tab4:
         )
         st.plotly_chart(fig8, use_container_width=True)
     
-    # Heatmap: Injury Frequency by Month and Club
     st.markdown("#### 🔥 Injury Hotmap: Months vs Top 10 Clubs")
     
     top_teams = df_filtered['Team Name'].value_counts().head(10).index
@@ -792,44 +840,6 @@ with tab4:
         template="plotly_white"
     )
     st.plotly_chart(fig9, use_container_width=True)
-    
-    # Team Vulnerability Score
-    st.markdown("#### Team Vulnerability Score (Composite Index)")
-    team_vuln = df_filtered.groupby('Team Name').agg({
-        'Name': 'count',
-        'Team_Performance_Drop': 'mean',
-        'Injury_Duration_Days': 'mean',
-        'Team_Impact_Severity': 'mean'
-    }).rename(columns={'Name': 'Injury_Count'})
-    
-    # Normalize and calculate vulnerability score
-    team_vuln['Vuln_Score'] = (
-        (team_vuln['Injury_Count'] / team_vuln['Injury_Count'].max()) * 0.3 +
-        (team_vuln['Team_Performance_Drop'] / team_vuln['Team_Performance_Drop'].max()) * 0.3 +
-        (team_vuln['Injury_Duration_Days'] / team_vuln['Injury_Duration_Days'].max()) * 0.2 +
-        (team_vuln['Team_Impact_Severity'] / team_vuln['Team_Impact_Severity'].max()) * 0.2
-    ) * 100
-    
-    team_vuln = team_vuln.sort_values('Vuln_Score', ascending=False).head(10)
-    
-    fig10 = go.Figure()
-    fig10.add_trace(go.Bar(
-        x=team_vuln.index,
-        y=team_vuln['Vuln_Score'],
-        marker=dict(color=team_vuln['Vuln_Score'], colorscale='Reds', showscale=True),
-        text=team_vuln['Vuln_Score'].round(1),
-        textposition='outside',
-        hovertemplate='<b>%{x}</b><br>Vulnerability Score: %{y:.1f}<extra></extra>'
-    ))
-    fig10.update_layout(
-        title="Team Vulnerability Index (Higher = More Vulnerable)",
-        xaxis_title="Team",
-        yaxis_title="Vulnerability Score (0-100)",
-        height=400,
-        template="plotly_white",
-        xaxis_tickangle=-45
-    )
-    st.plotly_chart(fig10, use_container_width=True)
 
 # ========== TAB 5: TEMPORAL PATTERNS ==========
 with tab5:
@@ -837,7 +847,6 @@ with tab5:
     
     col1, col2 = st.columns(2)
     
-    # Chart 1: Injuries by Season
     with col1:
         st.markdown("#### Injury Cases Across Seasons")
         season_injuries = df_filtered['Season'].value_counts().sort_index()
@@ -861,9 +870,8 @@ with tab5:
         )
         st.plotly_chart(fig11, use_container_width=True)
     
-    # Chart 2: Recovery Trend by Season
     with col2:
-        st.markdown("#### Average Recovery Time by Season")
+        st.markdown("#### Average Recovery by Season")
         recovery_by_season = df_filtered.groupby('Season')['Injury_Duration_Days'].mean()
         
         fig12 = go.Figure()
@@ -884,8 +892,7 @@ with tab5:
         )
         st.plotly_chart(fig12, use_container_width=True)
     
-    # Chart 3: Monthly Distribution
-    st.markdown("#### Injury Distribution by Month")
+    st.markdown("#### Monthly Injury Distribution")
     month_injuries = df_filtered['Injury_Month_Name'].value_counts().reindex(
         ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         fill_value=0
@@ -901,7 +908,7 @@ with tab5:
         hovertemplate='<b>%{x}</b><br>Injuries: %{y}<extra></extra>'
     ))
     fig13.update_layout(
-        title="Monthly Injury Distribution (All Seasons)",
+        title="Injury Distribution Across Months",
         xaxis_title="Month",
         yaxis_title="Number of Injuries",
         height=450,
@@ -909,40 +916,11 @@ with tab5:
         xaxis_tickangle=-45
     )
     st.plotly_chart(fig13, use_container_width=True)
-    
-    # Chart 4: Quarterly Analysis
-    st.markdown("#### Performance Impact by Quarter")
-    quarterly_impact = df_filtered.groupby('Injury_Quarter').agg({
-        'Team_Performance_Drop': 'mean',
-        'Name': 'count'
-    }).fillna(0)
-    quarterly_impact.index = ['Q' + str(int(i)) for i in quarterly_impact.index]
-    
-    fig14 = go.Figure()
-    fig14.add_trace(go.Bar(
-        x=quarterly_impact.index,
-        y=quarterly_impact['Team_Performance_Drop'],
-        marker=dict(color=[DANGER_COLOR, WARNING_COLOR, SUCCESS_COLOR, INFO_COLOR]),
-        text=quarterly_impact['Team_Performance_Drop'].round(2),
-        textposition='outside',
-        hovertemplate='<b>%{x}</b><br>Avg Drop: %{y:.2f} GD<extra></extra>',
-        name='Performance Drop'
-    ))
-    fig14.update_layout(
-        title="Average Team Performance Drop by Quarter",
-        xaxis_title="Quarter",
-        yaxis_title="Performance Drop (GD)",
-        height=400,
-        template="plotly_white",
-        showlegend=False
-    )
-    st.plotly_chart(fig14, use_container_width=True)
 
 # ========== TAB 6: ADVANCED STATISTICS ==========
 with tab6:
     st.markdown('<div class="tab-header">🔬 ADVANCED STATISTICAL ANALYSIS</div>', unsafe_allow_html=True)
     
-    # Statistical Correlations
     st.markdown("#### Correlation Analysis")
     
     correlation_data = df_filtered[[
@@ -967,92 +945,10 @@ with tab6:
     )
     st.plotly_chart(fig15, use_container_width=True)
     
-    # Age Group Analysis
-    st.markdown("#### Performance by Age Group")
-    
-    age_analysis = df_filtered.groupby('Age_Group').agg({
-        'Avg_Rating_Before_Injury': 'mean',
-        'Avg_Rating_After_Injury': 'mean',
-        'Performance_Drop_Index': 'mean',
-        'Injury_Duration_Days': 'mean',
-        'Name': 'count'
-    }).rename(columns={'Name': 'Count'})
-    
-    fig16 = go.Figure()
-    fig16.add_trace(go.Bar(
-        x=age_analysis.index,
-        y=age_analysis['Avg_Rating_Before_Injury'],
-        name='Before Injury',
-        marker=dict(color=SUCCESS_COLOR)
-    ))
-    fig16.add_trace(go.Bar(
-        x=age_analysis.index,
-        y=age_analysis['Avg_Rating_After_Injury'],
-        name='After Injury',
-        marker=dict(color=DANGER_COLOR)
-    ))
-    fig16.update_layout(
-        title="Player Rating by Age Group (Before vs After Injury)",
-        xaxis_title="Age Group",
-        yaxis_title="Average Rating",
-        height=450,
-        template="plotly_white",
-        barmode='group'
-    )
-    st.plotly_chart(fig16, use_container_width=True)
-    
-    # Position-based Analysis
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("#### Recovery Time by Position")
-        position_recovery = df_filtered.groupby('Position')['Injury_Duration_Days'].mean().sort_values(ascending=False).head(10)
-        
-        fig17 = go.Figure()
-        fig17.add_trace(go.Bar(
-            y=position_recovery.index,
-            x=position_recovery.values,
-            orientation='h',
-            marker=dict(color=position_recovery.values, colorscale='Blues_r'),
-            text=position_recovery.values.round(1),
-            textposition='outside',
-            hovertemplate='<b>%{y}</b><br>Avg Recovery: %{x:.1f} days<extra></extra>'
-        ))
-        fig17.update_layout(
-            title="Average Recovery Time by Player Position",
-            xaxis_title="Days",
-            height=450,
-            template="plotly_white"
-        )
-        st.plotly_chart(fig17, use_container_width=True)
-    
-    with col2:
-        st.markdown("#### Performance Resilience by Position")
-        position_resilience = df_filtered.groupby('Position')['Performance_Recovery_Rate'].mean().sort_values(ascending=False).head(10)
-        
-        fig18 = go.Figure()
-        fig18.add_trace(go.Bar(
-            y=position_resilience.index,
-            x=position_resilience.values,
-            orientation='h',
-            marker=dict(color=position_resilience.values, colorscale='Greens_r'),
-            text=position_resilience.values.round(1),
-            textposition='outside',
-            hovertemplate='<b>%{y}</b><br>Recovery Rate: %{x:.1f}%<extra></extra>'
-        ))
-        fig18.update_layout(
-            title="Performance Recovery Rate by Position",
-            xaxis_title="Recovery Rate (%)",
-            height=450,
-            template="plotly_white"
-        )
-        st.plotly_chart(fig18, use_container_width=True)
-    
-    # Statistical Summary Table
-    st.markdown("#### Statistical Summary")
+    st.markdown("#### Summary Statistics")
     summary_stats = df_filtered[[
         'Age', 'FIFA rating', 'Injury_Duration_Days', 'Performance_Drop_Index',
-        'Team_Performance_Drop', 'Team_Impact_Severity'
+        'Team_Performance_Drop'
     ]].describe().round(2)
     st.dataframe(summary_stats, use_container_width=True)
 
@@ -1062,7 +958,6 @@ with tab7:
     
     st.markdown("### 📊 Filtered Dataset")
     
-    # Select columns to export
     columns_to_export = st.multiselect(
         "Select columns to export:",
         options=df_filtered.columns.tolist(),
@@ -1071,12 +966,10 @@ with tab7:
         key="export_columns"
     )
     
-    # Export dataframe
     export_df = df_filtered[columns_to_export].sort_values('Performance_Drop_Index', ascending=False)
     
     st.dataframe(export_df, use_container_width=True, height=400)
     
-    # Download buttons
     col1, col2, col3 = st.columns(3)
     
     with col1:
@@ -1092,7 +985,6 @@ with tab7:
         excel_buffer = BytesIO()
         with pd.ExcelWriter(excel_buffer, engine='openpyxl') as writer:
             export_df.to_excel(writer, sheet_name='Injuries', index=False)
-            summary_stats.to_excel(writer, sheet_name='Statistics')
         excel_buffer.seek(0)
         st.download_button(
             label="📊 Download as Excel",
@@ -1109,26 +1001,6 @@ with tab7:
             file_name=f"injury_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
             mime="application/json"
         )
-    
-    # Summary Statistics
-    st.markdown("### 📈 Summary Statistics")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.metric("Total Records Analyzed", len(export_df))
-        st.metric("Unique Players", export_df['Name'].nunique())
-        st.metric("Teams Represented", export_df['Team Name'].nunique())
-    
-    with col2:
-        st.metric("Average Injury Duration", f"{export_df['Injury_Duration_Days'].mean():.0f} days")
-        st.metric("Most Common Position", export_df['Position'].mode()[0] if len(export_df) > 0 else "N/A")
-        st.metric("Average Age", f"{export_df['Age'].mean():.1f} years")
-    
-    with col3:
-        st.metric("Avg Performance Drop", f"{export_df['Performance_Drop_Index'].mean():.2f}")
-        st.metric("Avg Team Impact", f"{export_df['Team_Performance_Drop'].mean():.2f} GD")
-        st.metric("Most Common Injury", export_df['Injury'].mode()[0] if len(export_df) > 0 else "N/A")
 
 # ============================================================================
 # FOOTER
@@ -1136,7 +1008,7 @@ with tab7:
 st.markdown("---")
 st.markdown(f"""
 <div class="footer">
-    <strong>Football Injury Impact Dashboard v2.0</strong><br>
+    <strong>⚽ Football Injury Impact Dashboard v2.1 - Enhanced Design</strong><br>
     Developed for FootLens Analytics | Course: Mathematics for AI-II (IBDP)<br>
     Assignment: Developing User-Centered Dashboards to Solve Real-World Problems<br>
     <small>Data Source: Player Injuries & Team Performance | Last Updated: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}</small><br>
