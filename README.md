@@ -2,7 +2,7 @@
 
 A professional Streamlit dashboard analyzing football injuries and their impact on players and team performance, built for the IBCP Mathematics for AI‑II coursework by Jwal Patel.
 
-Live App: https://iadai-102-2013409-jwal-patel.streamlit.app/
+Live App: https://iadai202-2013409-jwal-patel-football-player-analysis.streamlit.app/
 
 ---
 
